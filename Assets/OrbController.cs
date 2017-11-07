@@ -16,6 +16,7 @@ public class OrbController : MonoBehaviour {
     }
 
     public void fallingToGround(){
+
         this.GetComponent<Rigidbody>().useGravity = true;
     }
 
