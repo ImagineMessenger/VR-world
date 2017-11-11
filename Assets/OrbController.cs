@@ -16,14 +16,18 @@ public class OrbController : MonoBehaviour {
     }
 
     public void fallingToGround(){
-
-        this.GetComponent<Rigidbody>().useGravity = true;
+        if (this.GetComponent<Rigidbody>())
+        {
+            this.GetComponent<Rigidbody>().useGravity = true;
+        } 
     }
 
     void OnCollisionEnter(Collision col)
     {
-
-        Destroy(this.GetComponent<Rigidbody>());
+        if (this.GetComponent<Rigidbody>()) {
+            Destroy(this.GetComponent<Rigidbody>());
+        }
+        
 
     }
 }
