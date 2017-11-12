@@ -19,6 +19,7 @@ public class OrbController : MonoBehaviour {
         if (this.GetComponent<Rigidbody>())
         {
             this.GetComponent<Rigidbody>().useGravity = true;
+        
         } 
     }
 
@@ -26,6 +27,7 @@ public class OrbController : MonoBehaviour {
     {
         if (this.GetComponent<Rigidbody>()) {
             Destroy(this.GetComponent<Rigidbody>());
+            
         }
         
 

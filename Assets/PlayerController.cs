@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEditor;
 
 public class PlayerController : MonoBehaviour {
 
-    public int speed;
+    public float speed;
 
     public Vector3 nextPosition;
     public bool isMoving;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     private GameObject gameStart;
     public EventTrigger gameStartTrigger;
     private GameObject portal;
+
 
 
     // Use this for initialization
@@ -37,7 +39,9 @@ public class PlayerController : MonoBehaviour {
         hasFire = false;
 
         nextPoints = new List<Vector3>();
-        nextPoints.Add(new Vector3((float)-3.15, 6, (float)-12.82));
+        nextPoints.Add(new Vector3((float)5.2, 6, (float)-13.7));
+        nextPoints.Add(new Vector3((float)0.98, 6, (float)-14.8));
+        nextPoints.Add(new Vector3((float)-3.15, 6, (float)-12.82)); 
         nextPoints.Add(new Vector3((float)-7.07, 6, (float)-12.09));
         nextPoints.Add(new Vector3((float)-6.78, 6, (float)-9.46));
         nextPoints.Add(new Vector3((float)-7.25, 6, (float)-6.48));
@@ -55,9 +59,11 @@ public class PlayerController : MonoBehaviour {
             {
                 isMoving = false;
                 int i = (int) pointHistory.Count - 1;
-                if (i != 5) {
+                if (i != 7) {
+                    //Destroy the Collider of the actual point to avoid bad pointer interraction
+                    Destroy(pointHistory[i].GetComponent<Collider>());
                     //Add Next Point
-                    addNextPoint(nextPoints[i]);
+                    addNextPoint(nextPoints[i], i);           
                 }
                 else {
 
@@ -71,14 +77,15 @@ public class PlayerController : MonoBehaviour {
 
 
             }
-        }
+        }  
 
-	}
+    }
 
     public void moveToPoint(GameObject point) {
 
         if(pointHistory.Contains(point))
         {
+            //Do nothing the point has already been visited
         }
         else
         {
@@ -91,13 +98,25 @@ public class PlayerController : MonoBehaviour {
        }    
     }
 
-    public void addNextPoint(Vector3 v)
+    public void addNextPoint(Vector3 v, int i)
     {
         GameObject nextLightOrb = Instantiate(lightOrb, v, Quaternion.identity);
+
+        //Add a Rigibody to the component
         nextLightOrb.AddComponent<Rigidbody>();
         nextLightOrb.GetComponent<Rigidbody>().useGravity = false;
-        nextLightOrb.transform.parent = GameObject.Find("Path").transform;
         
+        //Add a collider if needed
+        if (i != 0) {
+            nextLightOrb.AddComponent<SphereCollider>();
+            nextLightOrb.GetComponent<SphereCollider>().radius = (float)0.4;
+        }
+
+        //Reset name
+        nextLightOrb.name = "Light Orb " + i;
+
+        //Add it to the path
+        nextLightOrb.transform.parent = GameObject.Find("Path").transform;
 
     }
 
