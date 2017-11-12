@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEditor;
 
 public class PlayerController : MonoBehaviour {
 
@@ -20,6 +19,8 @@ public class PlayerController : MonoBehaviour {
     public EventTrigger gameStartTrigger;
     private GameObject portal;
 
+    public GameObject controller;
+
 
 
     // Use this for initialization
@@ -32,6 +33,8 @@ public class PlayerController : MonoBehaviour {
         //Supress the event trigger while the game is not started
         gameStartTrigger.enabled = false;
 
+        //Disable controller has long as we don't need it
+        controller.SetActive(false);
 
         isMoving = false;
         pointHistory = new List<GameObject>();
