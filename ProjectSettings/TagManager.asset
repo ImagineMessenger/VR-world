@@ -12,6 +12,7 @@ TagManager:
   - Pillar
   - Start
   - Controller
+  - HintOrb
   layers:
   - Default
   - TransparentFX

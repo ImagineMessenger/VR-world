@@ -17,18 +17,32 @@ public class PlayerController : MonoBehaviour {
     private bool hasFire;
     private GameObject gameStart;
     public EventTrigger gameStartTrigger;
-    private GameObject portal;
+    public GameObject portal;
 
     public GameObject controller;
+
+    private GameObject[] hintOrbs;
+
+    public bool puzzleStart;
+
+    public GameObject island;
+    public GameObject endRoom;
 
 
 
     // Use this for initialization
     void Start () {
 
+        //Get HintOrb objects
+        hintOrbs = GameObject.FindGameObjectsWithTag("HintOrb");
+        for(int h=0; h < 3; h++)
+        {
+            hintOrbs[h].SetActive(false);
+        }
+        puzzleStart = false;
+
         //Get the Game Start and save it
         gameStart = GameObject.Find("GameStart");
-        portal = GameObject.Find("Portal");
 
         //Supress the event trigger while the game is not started
         gameStartTrigger.enabled = false;
@@ -49,6 +63,12 @@ public class PlayerController : MonoBehaviour {
         nextPoints.Add(new Vector3((float)-6.78, 6, (float)-9.46));
         nextPoints.Add(new Vector3((float)-7.25, 6, (float)-6.48));
         nextPoints.Add(new Vector3((float)-7, (float) 6.1, (float)-4.12));
+        nextPoints.Add(new Vector3((float)-6.55, (float)6.1, (float)2.58));
+        nextPoints.Add(new Vector3((float)-1.51, (float)6, (float)5.22));
+        nextPoints.Add(new Vector3((float)1.27, (float)6, (float)6.96));
+        //Useless adding
+        nextPoints.Add(new Vector3((float)-7, (float)6.1, (float)-4.12));
+        
 
     }
 	
@@ -62,25 +82,59 @@ public class PlayerController : MonoBehaviour {
             {
                 isMoving = false;
                 int i = (int) pointHistory.Count - 1;
-                if (i != 7) {
-                    //Destroy the Collider of the actual point to avoid bad pointer interraction
-                    Destroy(pointHistory[i].GetComponent<Collider>());
-                    //Add Next Point
-                    addNextPoint(nextPoints[i], i);           
-                }
-                else {
 
-                    // StartGame
-                    gameStartTrigger.enabled = true;
+                //Destroy the Collider of the actual point to avoid bad pointer interraction
+                Destroy(pointHistory[i].GetComponent<Collider>());
 
+                switch (i)
+                {
+                    case 7:
+                        // StartGame
+                        gameStartTrigger.enabled = true;
+                        break;
+
+                    case 10:
+                        portal.AddComponent<SphereCollider>();
+                        portal.GetComponent<SphereCollider>().radius = (float)1.5;
+                        break;
+
+                    default:
+                       
+                        //Add Next Point
+                        addNextPoint(nextPoints[i], i);
+                        break;
                 }
-                
+  
+
+                // Delete previous Light Orbs
+                if (i > 2)
+                {
+                    pointHistory[i - 2].SetActive(false);
+                }
+
                 //To keep the game light we can supress useless LightOrb
                 //To implement
 
 
             }
-        }  
+        } else if(puzzleStart)
+        {
+            if (isFireSet())
+            {
+                //Continue the path
+                int i = (int)pointHistory.Count - 1;
+                
+                //Destroy the Collider of the actual point to avoid bad pointer interraction
+                Destroy(pointHistory[i].GetComponent<Collider>());
+
+                //Add Vortex
+                portal.SetActive(true);
+
+                //Add Next Point
+                addNextPoint(nextPoints[i], i);
+                puzzleStart = false;
+            }
+        }
 
     }
 
@@ -121,6 +175,34 @@ public class PlayerController : MonoBehaviour {
         //Add it to the path
         nextLightOrb.transform.parent = GameObject.Find("Path").transform;
 
+
+    }
+
+    public bool isFireSet(){
+        bool ret = true;
+
+        for (int j = 0; j<3 ; j++)
+        {
+            if (hintOrbs[j].activeSelf)
+            {
+                ret = false;
+            }
+        }
+
+        return ret;
+
+    }
+
+    public void setPuzzleStart(bool state)
+    {
+        puzzleStart = state;
+    }
+
+    public void teleportAtEnd()
+    {
+        endRoom.SetActive(true);
+        island.SetActive(false);
+        this.transform.position = new Vector3((float)75, (float)-18.4, (float)118.5);
     }
 
 }

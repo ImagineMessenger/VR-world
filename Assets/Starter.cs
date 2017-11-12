@@ -15,6 +15,7 @@ public class Starter : MonoBehaviour {
     void OnCollisionEnter(Collision collision)
     {
         lightOrb.SetActive(true);
+        this.gameObject.GetComponent<AudioSource>().Play();
     }
 
     // Update is called once per frame
