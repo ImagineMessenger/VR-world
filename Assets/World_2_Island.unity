@@ -766,6 +766,7 @@ GameObject:
   - component: {fileID: 89106160}
   - component: {fileID: 89106159}
   - component: {fileID: 89106158}
+  - component: {fileID: 89106161}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -849,6 +850,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &89106161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 89106156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f23b5b2e9f44b54fae4d8b7158fbc2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1497769023}
 --- !u!1001 &126807984
 Prefab:
   m_ObjectHideFlags: 0
@@ -1924,7 +1937,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 330593421}
   m_LocalRotation: {x: -0.098234445, y: 0.01135232, z: 0.0011209239, w: 0.99509794}
-  m_LocalPosition: {x: 2.6686752, y: -7.433532, z: 1.7050791}
+  m_LocalPosition: {x: -5.6999655, y: -5.779022, z: -10.761902}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -14781,6 +14794,28 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 919273951}
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 919273953}
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   - eventID: 4
@@ -14904,6 +14939,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!64 &919273953 stripped
+MeshCollider:
+  m_PrefabParentObject: {fileID: 64921061585577202, guid: fd73cbf8f47b7604391616602476a368,
+    type: 2}
+  m_PrefabInternal: {fileID: 195418532}
 --- !u!1001 &930697168
 Prefab:
   m_ObjectHideFlags: 0
@@ -16428,8 +16468,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1164889514}
-  m_LocalRotation: {x: -0.098234445, y: 0.011352321, z: 0.001120924, w: 0.99509794}
-  m_LocalPosition: {x: 2.6686752, y: -7.433532, z: 1.7050791}
+  m_LocalRotation: {x: 0, y: 0.23169956, z: 0, w: -0.97278744}
+  m_LocalPosition: {x: 13.44, y: -0.43, z: -15.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -25058,8 +25098,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14, y: 35.5}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -14, y: 15.2}
+  m_SizeDelta: {x: 700, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1497769023
 MonoBehaviour:
@@ -25084,13 +25124,13 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 46f15699ca1363240a63001d9ef2750f, type: 3}
     m_FontSize: 25
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 45
+    m_BestFit: 1
+    m_MinSize: 20
+    m_MaxSize: 25
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: "Bravo \xE0 toi aventurier!"
